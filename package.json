@@ -1,0 +1,29 @@
+{
+  "name": "contract-deposit",
+  "scripts": {
+    "test": "npx hardhat test --network hardhat",
+     "deploy-erc20":"npx hardhat run --network sepolia scripts/deploy.ts",
+     "deploy-erc20-local":"npx hardhat run --network hardhat scripts/deploy.ts",
+     "deploy-erc20-prd":"npx hardhat run --network polygon scripts/deploy.ts",
+     "deploy-swap":"npx hardhat run --network polygon scripts/deploy.iswap.ts",
+     "verify": "npx hardhat verify --network polygon 0x1BB5C215e79fF95C7bb8cc91f4d93DF1073dB3aB ",
+     "deploy-qucik":"npx hardhat run --network polygon scripts/deploy.quickswap.ts",
+     "deploy-deposit":"npx hardhat run --network sepolia scripts/deploy.deposit.ts",
+     "verify-deposit": "npx hardhat verify --network sepolia 0xCb16255B81CE9315840091540e6a1202818d980f ",
+     "verify-ERC20": "npx hardhat verify --network sepolia 0xA499170ebAeCEe96977c22B38d63dFA35D979012  USDT USDT 6"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@openzeppelin/contracts-upgradeable": "^4.9.0",
+    "@openzeppelin/hardhat-upgrades": "^1.27.0",
+    "ganache-cli": "^6.12.2",
+    "hardhat": "^2.14.1",
+    "hardhat-contract-sizer": "^2.9.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solhint": "^3.4.1",
+    "solidity-coverage": "^0.8.2"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.7"
+  }
+}
