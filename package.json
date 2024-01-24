@@ -9,8 +9,9 @@
      "verify": "npx hardhat verify --network polygon 0x1BB5C215e79fF95C7bb8cc91f4d93DF1073dB3aB ",
      "deploy-qucik":"npx hardhat run --network polygon scripts/deploy.quickswap.ts",
      "deploy-deposit":"npx hardhat run --network sepolia scripts/deploy.deposit.ts",
-     "verify-deposit": "npx hardhat verify --network sepolia 0xCb16255B81CE9315840091540e6a1202818d980f ",
-     "verify-ERC20": "npx hardhat verify --network sepolia 0xA499170ebAeCEe96977c22B38d63dFA35D979012  USDT USDT 6"
+     "verify-deposit": "npx hardhat verify --network sepolia 0x07573628E2F4cc95b8d2c12B74687DaEf21d5c2B ",
+     "verify-ERC20": "npx hardhat verify --network sepolia 0xA499170ebAeCEe96977c22B38d63dFA35D979012  USDT USDT 6",
+     "testlocal": "npx hardhat test --network hardhat  test/MTSD.test.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",

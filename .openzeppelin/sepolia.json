@@ -40,6 +40,11 @@
       "address": "0xCb16255B81CE9315840091540e6a1202818d980f",
       "txHash": "0x03c2eb58bd96e637a83115d7904bd72588068fe7fbdb8149f0a7abafb86803ba",
       "kind": "uups"
+    },
+    {
+      "address": "0x07573628E2F4cc95b8d2c12B74687DaEf21d5c2B",
+      "txHash": "0xb4973fdd18e46f773254b5f67b395e9974c7bd29acc8657648b8ada4366f1e44",
+      "kind": "uups"
     }
   ],
   "impls": {
@@ -2357,6 +2362,404 @@
             "numberOfBytes": "128"
           },
           "t_struct(WithdrawTx)1455_storage": {
+            "label": "struct IDeposit.WithdrawTx",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "receiveAddress",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "token",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "orderId",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "3ef325619e10bf49288c3bf8904f9bf0de1f5ef00c7f431d06701bc4cfacb631": {
+      "address": "0x1B497561A951175f9dd1C52E555cB7e6752f18d3",
+      "txHash": "0x7d3adb860d9b4e97b91444ffd9d2b0d20f2ca37d4f15115d96565ca25540b6c0",
+      "layout": {
+        "solcVersion": "0.8.9",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "contracts/upgrade/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "contracts/upgrade/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC1967UpgradeUpgradeable",
+            "src": "contracts/upgrade/ERC1967/ERC1967UpgradeUpgradeable.sol:169"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "UUPSUpgradeable",
+            "src": "contracts/upgrade/utils/UUPSUpgradeable.sol:111"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "contracts/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "contracts/access/OwnableUpgradeable.sol:23"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "contracts/access/OwnableUpgradeable.sol:95"
+          },
+          {
+            "label": "coldWallets",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:66"
+          },
+          {
+            "label": "opAddress",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:66"
+          },
+          {
+            "label": "signer",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:68"
+          },
+          {
+            "label": "fee",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_uint256",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:69"
+          },
+          {
+            "label": "feeMap",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:69"
+          },
+          {
+            "label": "suportToken",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_array(t_contract(IERC20)1773)dyn_storage",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:71"
+          },
+          {
+            "label": "isSuportToken",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:72"
+          },
+          {
+            "label": "isColdWallet",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:74"
+          },
+          {
+            "label": "pendingWalletOp",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_mapping(t_uint256,t_struct(Wallet)1790_storage)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:75"
+          },
+          {
+            "label": "withdrawTxs",
+            "offset": 0,
+            "slot": "210",
+            "type": "t_mapping(t_bytes32,t_struct(WithdrawTx)1551_storage)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:78"
+          },
+          {
+            "label": "depositTxs",
+            "offset": 0,
+            "slot": "211",
+            "type": "t_mapping(t_uint256,t_struct(AdminWithDrawTx)1540_storage)",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:80"
+          },
+          {
+            "label": "adminWithDrawTxIndex",
+            "offset": 0,
+            "slot": "212",
+            "type": "t_struct(Counter)3072_storage",
+            "contract": "Deposit",
+            "src": "contracts/Deposit.sol:82"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_address_payable": {
+            "label": "address payable",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_contract(IERC20)1773)dyn_storage": {
+            "label": "contract IERC20[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IERC20)1773": {
+            "label": "contract IERC20",
+            "numberOfBytes": "20"
+          },
+          "t_enum(Op)1793": {
+            "label": "enum IWalletManage.Op",
+            "members": [
+              "ColdOp",
+              "HotOp"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_enum(WithDrawType)1520": {
+            "label": "enum IDeposit.WithDrawType",
+            "members": [
+              "CustomerWithdraw",
+              "OpAduitWithdraw",
+              "AdminWithdraw",
+              "AdminWithdrawFee"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(WithdrawTx)1551_storage)": {
+            "label": "mapping(bytes32 => struct IDeposit.WithdrawTx)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(AdminWithDrawTx)1540_storage)": {
+            "label": "mapping(uint256 => struct IDeposit.AdminWithDrawTx)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Wallet)1790_storage)": {
+            "label": "mapping(uint256 => struct IWalletManage.Wallet)",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AdminWithDrawTx)1540_storage": {
+            "label": "struct IDeposit.AdminWithDrawTx",
+            "members": [
+              {
+                "label": "NeedSignerNum",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "status",
+                "type": "t_uint64",
+                "offset": 8,
+                "slot": "0"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "sender",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "payAddress",
+                "type": "t_address_payable",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "withDrawType",
+                "type": "t_enum(WithDrawType)1520",
+                "offset": 20,
+                "slot": "3"
+              },
+              {
+                "label": "token",
+                "type": "t_contract(IERC20)1773",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "signedAddress",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          },
+          "t_struct(Counter)3072_storage": {
+            "label": "struct CountersUpgradeable.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(Wallet)1790_storage": {
+            "label": "struct IWalletManage.Wallet",
+            "members": [
+              {
+                "label": "needSignerNum",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "walletAddress",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "status",
+                "type": "t_uint64",
+                "offset": 20,
+                "slot": "1"
+              },
+              {
+                "label": "direct",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "op",
+                "type": "t_enum(Op)1793",
+                "offset": 8,
+                "slot": "2"
+              },
+              {
+                "label": "signedAddress",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(WithdrawTx)1551_storage": {
             "label": "struct IDeposit.WithdrawTx",
             "members": [
               {

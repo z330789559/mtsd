@@ -41,6 +41,14 @@ const config: HardhatUserConfig = {
       gasPrice: 200000000000,
       gas: 4000000,
     },
+    goerli: {
+      url: "https://eth-goerli.g.alchemy.com/v2/q04sQKbbsntbXFOad8DCFZ_5kR8jEJ4x",
+      accounts: ["1ae329dcfefe371422a9f3dcddfb742e6848525afe02fa2c0cae71a42788abf4"],
+      chainId: 5,
+      gasPrice: 200000000000,
+      gas: 4000000,
+
+    },
     sepolia: {
       url: "https://sepolia.infura.io/v3/7307908c50f44d578fd7470e6df7921e",
       accounts: ["9fd4abb4a4e78804ae4b40fbab6d53355fffc701da2dbd9be567ce52bca22fca","ee0832ebea198e742900d6c727413cef4b96edd053e5480b336809e06939005a"]

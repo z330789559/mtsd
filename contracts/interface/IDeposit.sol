@@ -40,7 +40,7 @@ interface IDeposit {
         bytes32 khash
     );
     event Fee(address token, uint amount, uint index);
-    event OpAduitWithdraw(bytes32 index, uint amount);
+    event OpAuditWithdraw(bytes32 index, uint amount);
     event AdminWithdraw(
         uint amount,
         address payAddress,

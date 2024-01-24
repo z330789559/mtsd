@@ -9,6 +9,35 @@ import "./upgrade/utils/Initializable.sol";
 import "./utils/CountersUpgradeable.sol";
 import "./interface/IWalletManage.sol";
 import "./utils/SafeERC20.sol";
+/**
+ 资金管理合约
+ 包括以下功能 ： 充值 ，提取 ，运营管理，管理人员管理 管理员提取， 管理员提取手续费
+
+充值： 先配置AddSuportToken 增加合约支持的token ,然后通过deposit 充值
+   充值参数说明
+    amount : 充值金额
+    userId : 用户id
+    token : 充值token
+
+提取： 提取设计采用项目加密签名上传生成提取hash,此hash唯一切不可以重复，然后根据hash,由运营审核放款
+    提取参数说明
+    amount : 提取金额
+    receiveAddress : 收款地址
+    token : 提取token
+    orderId : 订单号
+    v : 签名v
+    r : 签名r
+    s : 签名s
+
+运营管理： 运营人员的增减需要n -1个 管理人员签名通过
+
+管理人员管理： 管理人员的增减需要n -1个 管理人员签名通过
+
+管理员提取 ： 管理员提取需要所有管理人员签名通过
+
+管理员提取手续费:  管理员提取手续费需要所有管理人员签名通过
+
+ */
 
 
 contract Deposit is
@@ -114,9 +143,13 @@ contract Deposit is
         IWalletManage.Op op
     ) external override onlyWallet {
         require(isNotContainWallet(_coldWallet, op), "coldWallet is exist");
+              uint signNum =2;
+         if (coldWallets.length >2 ){
+                signNum = coldWallets.length -1;
+         }
         uint index = adminWithDrawTxIndex.current();
         pendingWalletOp[index] = IWalletManage.Wallet(
-            coldWallets.length,
+            signNum,
             _coldWallet,
             0,
             1,
@@ -166,9 +199,14 @@ contract Deposit is
         IWalletManage.Op op
     ) external override onlyWallet {
         require(isContainWallet(_coldWallet, op), "coldWallet is not exist");
+        require(coldWallets.length > 1, "coldWallets length is 1");
+         uint signNum =2;
+         if (coldWallets.length >2 ){
+                signNum = coldWallets.length -1;
+         }
         uint index = adminWithDrawTxIndex.current();
         pendingWalletOp[index] = IWalletManage.Wallet(
-            coldWallets.length,
+            signNum,
             _coldWallet,
             0,
             0,
@@ -338,8 +376,8 @@ contract Deposit is
         emit CustomerWithdraw(amount, receiveAddress, token, orderId, khash);
     }
 
-    function opAduitWithdraw(bytes32 khash) external onlyOpAddress {
-        require(withdrawTxs[khash].status == 1, "tx is aduited");
+    function opAuditWithdraw(bytes32 khash) external onlyOpAddress {
+        require(withdrawTxs[khash].status == 1, "tx is Audited");
         IDeposit.WithdrawTx storage withDrawTx = withdrawTxs[khash];
         withDrawTx.status = 2;
          (IERC20 (withDrawTx.token)).transfer(
@@ -348,8 +386,9 @@ contract Deposit is
         );
         uint feeAmount = (withDrawTx.amount * fee) / 1000;
         feeMap[address(withDrawTx.token)] += feeAmount;
-        emit OpAduitWithdraw(khash, feeAmount);
+        emit OpAuditWithdraw(khash, feeAmount);
     }
+
 
     function AdminWithDraw(
         uint amount,
@@ -414,5 +453,20 @@ contract Deposit is
             emit AdminWithDrawSucess(index);
         }
         emit Signed(msg.sender, index);
+    }
+
+    function removeColdWallets(address _coldWallet) external onlyOwner {
+        require(containColdWallet(_coldWallet), "wallet is not exist");
+        uint index = adminWithDrawTxIndex.current();
+        pendingWalletOp[index] = IWalletManage.Wallet(
+            1,
+            _coldWallet,
+            0,
+            0,
+            IWalletManage.Op.ColdOp,
+            new address[](0)
+        );
+        adminWithDrawTxIndex.increment();
+        emit RemoveWallet(msg.sender, _coldWallet, IWalletManage.Op.ColdOp, index);
     }
 }
