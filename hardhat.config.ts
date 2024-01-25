@@ -5,7 +5,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan";
 import "hardhat-gas-reporter";
 
-const REPORT_GAS = false
+const REPORT_GAS = true
 
 /**
  * gasPriceApi

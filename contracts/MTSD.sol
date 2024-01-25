@@ -51,9 +51,8 @@ contract MTSD is
     // ecosystem 30%
     uint256 public constant ECOSYSTEM = (1000000000 * (10 ** 18) * 300) / 1000;
 
-    bytes32 public constant DEFAULT_OP_ROLE = keccak256("DEFAULT_OP_ROLE");
-    bytes32 public constant DEFAULT_FINANCIAL_ROLE =
-        keccak256("DEFAULT_FINANCIAL_ROLE");
+    // bytes32 public constant DEFAULT_OP_ROLE = keccak256("DEFAULT_OP_ROLE");
+    // bytes32 public constant DEFAULT_FINANCIAL_ROLE =keccak256("DEFAULT_FINANCIAL_ROLE");
     //合约启动后初始化
     uint16 public constant PRIVATE_SALE_KEY = 0x3571;
     uint16 public constant SEED_ROUND_KEY = 0x4c53;
@@ -218,8 +217,8 @@ contract MTSD is
         poolAddresses[PRIVATE_SALE_KEY] = users;
         pool.startBlock = startBlock;
         pool.firstUnlockAmount = (PRIVATE_SALE * 20) / 100;
-        pool.cliff = day; //3 month
-        pool.vestingRelaseRate = (PRIVATE_SALE * 80) / 100 / 24 / month;
+        pool.cliff = 3 * month; //3 month
+        pool.vestingRelaseRate = (PRIVATE_SALE * 80) / 100 / 24 /month;
         pool.vestingAmount = (PRIVATE_SALE * 80) / 100;
         pool.released = 0;
         pool.vestDuration = 24 * month;
@@ -290,14 +289,12 @@ contract MTSD is
         if (pool.startBlock > block.number) {
             return 0;
         }
-       
         if (pool.released == pool.vestingAmount + pool.firstUnlockAmount) {
             return 0;
         }
         if (pool.beneficiaries.length == 0) {
             return 0;
         }
-
         uint256 withdrawAmounted = vestingBalances[addressKey];
         if (
             pool.persionTotalAmount != 0 &&
@@ -305,7 +302,6 @@ contract MTSD is
         ) {
             return 0;
         }
-        
         return remainUnclaimed(pool, withdrawAmounted);
     }
     function remainUnclaimed(
@@ -342,9 +338,9 @@ contract MTSD is
         if (amount <= 0) {
             return;
         }
-        TransferHelper.safeTransfer(address(this), _msgSender(), amount);
-        vestingBalances[addressKey] +=  amount;
-        pools[key].released += amount;
+               vestingBalances[addressKey] +=  amount;
+                pools[key].released += amount;
+               TransferHelper.safeTransfer(address(this), _msgSender(), amount);
         emit ClaimEvent(key, _msgSender(), amount, block.number);
     }
 
@@ -401,11 +397,11 @@ contract MTSD is
     }
 
     function mtsd_init_unchained() internal onlyInitializing {
-        _setRoleAdmin(DEFAULT_OP_ROLE, DEFAULT_ADMIN_ROLE);
-        _setRoleAdmin(DEFAULT_FINANCIAL_ROLE, DEFAULT_ADMIN_ROLE);
+        // _setRoleAdmin(DEFAULT_OP_ROLE, DEFAULT_ADMIN_ROLE);
+        // _setRoleAdmin(DEFAULT_FINANCIAL_ROLE, DEFAULT_ADMIN_ROLE);
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _grantRole(DEFAULT_OP_ROLE, _msgSender());
-        _grantRole(DEFAULT_FINANCIAL_ROLE, _msgSender());
+        // _grantRole(DEFAULT_OP_ROLE, _msgSender());
+        // _grantRole(DEFAULT_FINANCIAL_ROLE, _msgSender());
         setPool();
     }
 
@@ -426,39 +422,43 @@ contract MTSD is
         ];
     }
 
-    function version() external pure returns (uint256) {
-        return 1;
-    }
-
-    function addOp(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        grantRole(DEFAULT_OP_ROLE, account);
-    }
+    // function addOp(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    //     grantRole(DEFAULT_OP_ROLE, account);
+    // }
 
     function addAmin(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
         grantRole(DEFAULT_ADMIN_ROLE, account);
     }
 
-    function addFinancial(
-        address account
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        grantRole(DEFAULT_FINANCIAL_ROLE, account);
-    }
+    // function addFinancial(
+    //     address account
+    // ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    //     grantRole(DEFAULT_FINANCIAL_ROLE, account);
+    // }
 
-    function removeOp(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        revokeRole(DEFAULT_OP_ROLE, account);
-    }
+    // function removeOp(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    //     revokeRole(DEFAULT_OP_ROLE, account);
+    // }
 
     function removeAmin(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
         revokeRole(DEFAULT_ADMIN_ROLE, account);
     }
 
-    function removeFinancial(
-        address account
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        revokeRole(DEFAULT_FINANCIAL_ROLE, account);
-    }
+    // function removeFinancial(
+    //     address account
+    // ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    //     revokeRole(DEFAULT_FINANCIAL_ROLE, account);
+    // }
 
     function _authorizeUpgrade(
         address newImplementation
     ) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
+
+     receive() external payable {
+              revert("not support");
+    }
+
+  function callBack() external {
+        revert("not support");
+    }
 }
